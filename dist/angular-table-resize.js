@@ -272,7 +272,7 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
             if (!cache) cache = {};
             $(columns).each(function(index, column) {
                 var colScope = angular.element(column).scope()
-                var id = colScope.rzCol || $(column).attr('id')
+                var id = colScope.rzCol || $(column).attr('id') || $(column).attr('data-id')
                 if (!id) return;
                 cache[id] = resizer.saveAttr(column);
             })
@@ -289,7 +289,7 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
 
             ctrlColumns.each(function(index, column){
                 var colScope = angular.element(column).scope()
-                var id = colScope.rzCol || $(column).attr('id')
+                var id = colScope.rzCol || $(column).attr('id') || $(column).attr('data-id')
                 var cacheWidth = cache[id];
                 $(column).css({ width: cacheWidth });
             })
