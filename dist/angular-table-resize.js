@@ -283,7 +283,7 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
         }
         
         function setColumnSize(columnId, width) {
-            var $column = $(table).find('#' + columnId + ', [data-id="' + columnId + ']"');
+            var $column = $(table).find('#' + columnId + ', [data-id="' + columnId + '"]');
             $column.css({ width: width });
         }
 
