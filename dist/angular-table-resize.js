@@ -93,7 +93,12 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
                     resizeStorage.clearCurrent(table, mode, profile)
                 },
                 setColumnSize: setColumnSize,
-                saveColumnSizes: saveColumnSizes
+                saveColumnSizes: function () {
+                    resizer.onFirstDrag();
+                    resizer.onTableReady();
+                    saveColumnSizes();
+                    resizer.onEndDrag();
+                }
             })
         }
 
@@ -144,10 +149,6 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
 
             // Set column sizes from cache
             setColumnSizes(cache);
-            
-            // Save column sizes if not set
-            resizer.onEndDrag();
-            saveColumnSizes();
 
             // Initialise all handlers for every column
             handleColumns.each(function(index, column) {
