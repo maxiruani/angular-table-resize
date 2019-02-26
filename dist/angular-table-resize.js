@@ -91,7 +91,9 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
                 },
                 clearStorageActive: function() {
                     resizeStorage.clearCurrent(table, mode, profile)
-                }
+                },
+                setColumnSize: setColumnSize,
+                saveColumnSizes: saveColumnSizes
             })
         }
 
@@ -278,6 +280,11 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
             })
 
             resizeStorage.saveTableSizes(table, mode, profile, cache);
+        }
+        
+        function setColumnSize(columnId, width) {
+            var $column = $(table).find('#' + columnId + ', [data-id]="' + columnId + '"');
+            $column.css({ width: width });
         }
 
         function setColumnSizes(cache) {
