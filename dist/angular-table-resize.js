@@ -175,7 +175,12 @@ angular.module("rzTable").directive('rzTable', ['resizeStorage', '$injector', '$
         }
 
         function bindEventToHandle(scope, table, handle, column) {
-
+            
+            // Stop propagation on handle
+            $(handle).click(function (event) {
+                event.stopPropagation();
+            });
+            
             // This event starts the dragging
             $(handle).mousedown(function(event) {
                 if (isFirstDrag) {
